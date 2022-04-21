@@ -1,10 +1,13 @@
-import { Button } from 'rsuite';
-import {Activity } from 'react-bootstrap-icons'
+import { Route, Routes } from 'react-router'
+import WorkDayPickerDemo from './views/WorkDayPickerDemo'
 
 function App() {
   return (
-    <Button>hello world<Activity size={16}/></Button>
-  );
+    <Routes>
+      <Route path="/" element={<h1>Hello</h1>} />
+      <Route path="/work-day-picker-demo" element={<WorkDayPickerDemo />} />
+    </Routes>
+  )
 }
 
-export default App;
+export default App
