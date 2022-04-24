@@ -1,27 +1,41 @@
-import { FormEvent, useState } from "react"
-import { form2json } from "../../utils/form"
+import { FormEvent, useRef, useState } from 'react'
+import { getDaysInMonth } from '../../utils/date'
+import { form2json } from '../../utils/form'
 
 interface SetupNextValue {
-  title: string,
-  year: number,
-  month: number,
-  date: number,
+  title: string
+  year: number
+  month: number
+  date: number
   count: number
 }
-interface WorkDayPickerSetupProps {
+interface SetupProps {
   onNext?: (value: SetupNextValue) => {}
 }
 
-
-const WorkDayPickerSetup: React.FunctionComponent<
-  WorkDayPickerSetupProps
-> = ({onNext}) => {
+const Setup: React.FunctionComponent<SetupProps> = ({ onNext }) => {
   const [isValidated, setIsValidated] = useState(false)
+  const yearRef = useRef<HTMLSelectElement | null>(null)
+  const monthRef = useRef<HTMLSelectElement | null>(null)
+  const [daysInMonth, setDaysInMonth] = useState<number|undefined>(undefined)
 
-  const handleSubmit = (e:FormEvent) => {
+  const handleChangeMonth = () => {
+    const year = Number(yearRef.current?.value)
+    const month = Number(monthRef.current?.value)
+    // console.log(year, month)
+    if (year===0 || month===0) {
+      setDaysInMonth(undefined)
+    }else {
+      setDaysInMonth(getDaysInMonth(year, month))
+    }
+    // console.log(ret)
+
+  }
+
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     const form = e.target as HTMLFormElement
-    if(form.checkValidity()){
+    if (form.checkValidity()) {
       const json = form2json(form)
       onNext?.({
         title: json.title,
@@ -30,17 +44,20 @@ const WorkDayPickerSetup: React.FunctionComponent<
         date: parseInt(json.date),
         count: parseInt(json.count),
       })
-
     }
     setIsValidated(true)
   }
   return (
-    <form className={`needs-validation ${isValidated ? 'was-validated' : ''}`} noValidate onSubmit={handleSubmit}>
+    <form
+      className={`needs-validation ${isValidated ? 'was-validated' : ''}`}
+      noValidate
+      onSubmit={handleSubmit}
+    >
       <div className="row">
         <div className="col">
           <input
             type="text"
-            name='title'
+            name="title"
             className="form-control form-control-sm"
             placeholder="标题"
             aria-label="标题"
@@ -49,8 +66,18 @@ const WorkDayPickerSetup: React.FunctionComponent<
           <div className="invalid-feedback">请填写标题</div>
         </div>
         <div className="col">
-          <select className="form-select form-select-sm" name='year' aria-label="选择年" required>
-            <option value=''>选择年</option>
+          <select
+            className="form-select form-select-sm"
+            name="year"
+            aria-label="选择年"
+            required
+            defaultValue={''}
+            ref={yearRef}
+            onChange={handleChangeMonth}
+          >
+            <option value="" disabled>
+              选择年
+            </option>
             {[...Array(10)].map((_, index) => (
               <option value={new Date().getFullYear() + index} key={index}>
                 {new Date().getFullYear() + index} 年
@@ -60,8 +87,18 @@ const WorkDayPickerSetup: React.FunctionComponent<
           <div className="invalid-feedback">请选择年</div>
         </div>
         <div className="col">
-          <select className="form-select form-select-sm" name='month' aria-label="选择月" required>
-            <option value=''>选择月</option>
+          <select
+            className="form-select form-select-sm"
+            name="month"
+            aria-label="选择月"
+            required
+            defaultValue={''}
+            ref={monthRef}
+            onChange={handleChangeMonth}
+          >
+            <option value="" disabled>
+              选择月
+            </option>
             {[...Array(12)].map((_, index) => (
               <option value={1 + index} key={index}>
                 {1 + index} 月
@@ -71,22 +108,30 @@ const WorkDayPickerSetup: React.FunctionComponent<
           <div className="invalid-feedback">请选择月</div>
         </div>
         <div className="col">
-          <select className="form-select form-select-sm" name='date' aria-label="选择日" required>
-            <option value=''>选择日</option>
-            {[...Array(12)].map((_, index) => (
+          <select
+            className="form-select form-select-sm"
+            name="date"
+            aria-label="选择日"
+            required
+            defaultValue={''}
+            disabled={daysInMonth === undefined}
+          >
+            <option value="" disabled>
+              选择日
+            </option>
+            {daysInMonth !== undefined && [...Array(daysInMonth)].map((_, index) => (
               <option value={1 + index} key={index}>
-                {1 + index} 月
+                {1 + index} 日
               </option>
             ))}
           </select>
           <div className="invalid-feedback">请选择日</div>
-
         </div>
 
         <div className="col">
           <input
             type="number"
-            name='count'
+            name="count"
             className="form-control form-control-sm"
             placeholder="课程天数"
             aria-label="课程天数"
@@ -109,4 +154,4 @@ const WorkDayPickerSetup: React.FunctionComponent<
   )
 }
 
-export default WorkDayPickerSetup
+export default Setup

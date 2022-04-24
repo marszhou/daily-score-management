@@ -2,7 +2,7 @@ import React, { FunctionComponent, DetailedHTMLProps } from 'react'
 import { ArrowLeftShort, ArrowRightShort } from 'react-bootstrap-icons'
 import style from './Cell.module.scss'
 
-interface WDPMonthCellProps
+interface CellProps
   extends DetailedHTMLProps<
     React.TdHTMLAttributes<HTMLTableCellElement>,
     HTMLTableCellElement
@@ -10,7 +10,7 @@ interface WDPMonthCellProps
   date: number
 }
 
-const WDPMonthCell: FunctionComponent<WDPMonthCellProps> = ({
+const Cell: FunctionComponent<CellProps> = ({
   date,
   className,
 }) => {
@@ -34,4 +34,4 @@ const WDPMonthCell: FunctionComponent<WDPMonthCellProps> = ({
   )
 }
 
-export default WDPMonthCell
+export default Cell

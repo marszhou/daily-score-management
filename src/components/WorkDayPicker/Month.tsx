@@ -1,8 +1,8 @@
 import React, { DetailedHTMLProps, FunctionComponent } from 'react'
-import WDPMonthCell from './Cell'
+import Cell from './Cell'
 import style from './Month.module.scss'
 
-interface WDPMonthInterface
+interface MonthInterface
   extends DetailedHTMLProps<
     React.TableHTMLAttributes<HTMLTableElement>,
     HTMLTableElement
@@ -12,7 +12,7 @@ interface WDPMonthInterface
   selectedDates: Array<number>
 }
 
-const WDPMonth: FunctionComponent<WDPMonthInterface> = ({
+const Month: FunctionComponent<MonthInterface> = ({
   year,
   month,
   selectedDates = [],
@@ -36,13 +36,13 @@ const WDPMonth: FunctionComponent<WDPMonthInterface> = ({
       </thead>
       <tbody>
         <tr>
-          <WDPMonthCell date={12} />
-          <WDPMonthCell date={12} />
-          <WDPMonthCell date={12} />
-          <WDPMonthCell date={12} />
-          <WDPMonthCell date={12} />
-          <WDPMonthCell date={12} className="table-light" />
-          <WDPMonthCell date={12} className="table-light" />
+          <Cell date={12} />
+          <Cell date={12} />
+          <Cell date={12} />
+          <Cell date={12} />
+          <Cell date={12} />
+          <Cell date={12} className="table-light" />
+          <Cell date={12} className="table-light" />
         </tr>
         <tr>
           <td>1</td>
@@ -67,4 +67,4 @@ const WDPMonth: FunctionComponent<WDPMonthInterface> = ({
   )
 }
 
-export default WDPMonth
+export default Month
