@@ -2,7 +2,7 @@ import { FormEvent, useRef, useState } from 'react'
 import { getDaysInMonth } from '../../utils/date'
 import { form2json } from '../../utils/form'
 
-interface SetupNextValue {
+export interface SetupNextValue {
   title: string
   year: number
   month: number
@@ -10,39 +10,46 @@ interface SetupNextValue {
   count: number
 }
 interface SetupProps {
-  onNext?: (value: SetupNextValue) => {}
+  onNext?(value: SetupNextValue): void
 }
 
 const Setup: React.FunctionComponent<SetupProps> = ({ onNext }) => {
   const [isValidated, setIsValidated] = useState(false)
   const yearRef = useRef<HTMLSelectElement | null>(null)
   const monthRef = useRef<HTMLSelectElement | null>(null)
-  const [daysInMonth, setDaysInMonth] = useState<number|undefined>(undefined)
+  const [daysInMonth, setDaysInMonth] = useState<number | undefined>(undefined)
 
   const handleChangeMonth = () => {
     const year = Number(yearRef.current?.value)
     const month = Number(monthRef.current?.value)
     // console.log(year, month)
-    if (year===0 || month===0) {
+    if (year === 0 || month === 0) {
       setDaysInMonth(undefined)
-    }else {
+    } else {
       setDaysInMonth(getDaysInMonth(year, month))
     }
     // console.log(ret)
-
   }
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     const form = e.target as HTMLFormElement
-    if (form.checkValidity()) {
-      const json = form2json(form)
+    if (true || form.checkValidity()) {
+      // const json = form2json(form)
+      // onNext?.({
+      //   title: json.title,
+      //   year: parseInt(json.year),
+      //   month: parseInt(json.month),
+      //   date: parseInt(json.date),
+      //   count: parseInt(json.count),
+      // })
+      // -- 测试数据 --
       onNext?.({
-        title: json.title,
-        year: parseInt(json.year),
-        month: parseInt(json.month),
-        date: parseInt(json.date),
-        count: parseInt(json.count),
+        title: '2022年第二教学周期',
+        year: 2022,
+        month: 2,
+        date: 19,
+        count: 40
       })
     }
     setIsValidated(true)
@@ -119,11 +126,12 @@ const Setup: React.FunctionComponent<SetupProps> = ({ onNext }) => {
             <option value="" disabled>
               选择日
             </option>
-            {daysInMonth !== undefined && [...Array(daysInMonth)].map((_, index) => (
-              <option value={1 + index} key={index}>
-                {1 + index} 日
-              </option>
-            ))}
+            {daysInMonth !== undefined &&
+              [...Array(daysInMonth)].map((_, index) => (
+                <option value={1 + index} key={index}>
+                  {1 + index} 日
+                </option>
+              ))}
           </select>
           <div className="invalid-feedback">请选择日</div>
         </div>

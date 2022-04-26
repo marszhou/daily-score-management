@@ -7,17 +7,17 @@ interface CellProps
     React.TdHTMLAttributes<HTMLTableCellElement>,
     HTMLTableCellElement
   > {
-  date: number
+  day: number
 }
 
 const Cell: FunctionComponent<CellProps> = ({
-  date,
+  day,
   className,
 }) => {
   return (
     <td className={className}>
       <div className="d-flex justify-content-center">
-        <div className="flex-fill">{date}</div>
+        <div className="flex-fill">{day}</div>
         <div className={'flex-fill ' + style.actions}>
           <button className="badge rounded-pill bg-primary">
             开始

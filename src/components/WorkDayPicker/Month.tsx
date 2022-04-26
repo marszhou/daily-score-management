@@ -1,6 +1,7 @@
 import React, { DetailedHTMLProps, FunctionComponent } from 'react'
 import Cell from './Cell'
 import style from './Month.module.scss'
+import { WorkDayPickerDays } from './WorkDayPicker'
 
 interface MonthInterface
   extends DetailedHTMLProps<
@@ -9,13 +10,13 @@ interface MonthInterface
   > {
   year?: number
   month?: number
-  selectedDates: Array<number>
+  selectedDays: WorkDayPickerDays
 }
 
 const Month: FunctionComponent<MonthInterface> = ({
   year,
   month,
-  selectedDates = [],
+  selectedDays = [],
 }) => {
   return (
     <table className={`table ${style.monthTable}`}>
@@ -36,13 +37,13 @@ const Month: FunctionComponent<MonthInterface> = ({
       </thead>
       <tbody>
         <tr>
-          <Cell date={12} />
-          <Cell date={12} />
-          <Cell date={12} />
-          <Cell date={12} />
-          <Cell date={12} />
-          <Cell date={12} className="table-light" />
-          <Cell date={12} className="table-light" />
+          <Cell day={12} />
+          <Cell day={12} />
+          <Cell day={12} />
+          <Cell day={12} />
+          <Cell day={12} />
+          <Cell day={12} className="table-light" />
+          <Cell day={12} className="table-light" />
         </tr>
         <tr>
           <td>1</td>
