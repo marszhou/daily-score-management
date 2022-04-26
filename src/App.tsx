@@ -3,10 +3,12 @@ import WorkDayPickerDemo from './views/WorkDayPickerDemo'
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<h1>Hello</h1>} />
-      <Route path="/work-day-picker-demo" element={<WorkDayPickerDemo />} />
-    </Routes>
+    <div className="container-lg">
+      <Routes>
+        <Route path="/" element={<h1>Hello</h1>} />
+        <Route path="/work-day-picker-demo" element={<WorkDayPickerDemo />} />
+      </Routes>
+    </div>
   )
 }
 

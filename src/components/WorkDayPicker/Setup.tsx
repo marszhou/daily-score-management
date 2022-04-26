@@ -48,7 +48,7 @@ const Setup: React.FunctionComponent<SetupProps> = ({ onNext }) => {
         title: '2022年第二教学周期',
         year: 2022,
         month: 2,
-        date: 19,
+        date: 1,
         count: 40
       })
     }

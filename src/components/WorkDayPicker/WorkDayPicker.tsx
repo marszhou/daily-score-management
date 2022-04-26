@@ -22,7 +22,7 @@ const WorkDayPicker: FunctionComponent<WorkDayPickerProps> = ({
   }, [])
   const handleNext = (value: SetupNextValue) => {
     const { title, year, month, date, count } = value
-    let d = new Date(year, month - 1, date)
+    let d = new Date(year, month - 1, date-1)
     const days = [...Array(count)].map(() => {
       d = getWorkDay(new Date(d.getTime() + 86400_000))
       return d
@@ -38,7 +38,7 @@ const WorkDayPicker: FunctionComponent<WorkDayPickerProps> = ({
     return (
       <>
         {!defaultValues && <Reset onReset={handleReset} />}
-        <Picker defaultValues={days} />
+        <Picker days={days} />
       </>
     )
   } else {

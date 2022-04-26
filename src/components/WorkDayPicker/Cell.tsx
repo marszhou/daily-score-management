@@ -8,25 +8,33 @@ interface CellProps
     HTMLTableCellElement
   > {
   day: number
+  month: number
+  displayMonth: boolean
+  selected: boolean
 }
 
 const Cell: FunctionComponent<CellProps> = ({
   day,
+  month,
+  displayMonth,
   className,
+  selected,
 }) => {
   return (
-    <td className={className}>
+    <td className={className + ' ' + (selected ? style.selected : '')}>
       <div className="d-flex justify-content-center">
-        <div className="flex-fill">{day}</div>
+        <div className="flex-fill">{`${
+          displayMonth ? `${month}/` : ''
+        }${day}`}</div>
         <div className={'flex-fill ' + style.actions}>
-          <button className="badge rounded-pill bg-primary">
+          <button className={'badge rounded-pill bg-warning ' + style.btnSm}>
             开始
-            <ArrowLeftShort />
+            <ArrowLeftShort size={12} />
           </button>
           <br />
-          <button className="badge rounded-pill bg-danger">
+          <button className={'badge rounded-pill bg-danger ' + style.btnSm}>
             结束
-            <ArrowRightShort />
+            <ArrowRightShort size={12} />
           </button>
         </div>
       </div>

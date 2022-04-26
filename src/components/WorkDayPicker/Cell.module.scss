@@ -1,3 +1,5 @@
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
 td:hover {
   .actions {
     visibility: visible;
@@ -7,4 +9,11 @@ td{
   .actions {
     visibility: hidden;
   }
+}
+
+.btnSm {
+  font-size: 0.5em;
+}
+.selected {
+  background-color: $cyan-100!important;
 }

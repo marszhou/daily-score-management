@@ -3,6 +3,12 @@
     td {
       height: 4em;
       width: 14.28%;
+
+      &.notThisMonth {
+        pointer-events: none;
+        opacity: 0.4;
+      }
     }
+
   }
 }
