@@ -45,7 +45,7 @@ const Picker: FunctionComponent<PickerProps> = ({ days = [] }) => {
           year={year}
           month={month}
           selectedDays={days}
-          first={index===0}
+          firstMonthOfList={index===0}
         />
       ))}
       <AddButton onClick={handleAddEnd}>结尾添加</AddButton>

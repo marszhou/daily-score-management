@@ -20,8 +20,8 @@ interface MonthInterface
   year: number
   month: number
   sundayFirst?: boolean
-  selectedDays: WorkDayPickerDays,
-  first: boolean
+  selectedDays: WorkDayPickerDays
+  firstMonthOfList: boolean
 }
 
 const TableHead = function ({ sundayFirst }: { sundayFirst: boolean }) {
@@ -47,14 +47,18 @@ const Month: FunctionComponent<MonthInterface> = ({
   month,
   sundayFirst = false,
   selectedDays = [],
-  first
+  firstMonthOfList,
 }) => {
   let [start, , days] = getCalendarMonthRange(year, month, sundayFirst)
   const weeks = days / 7
-  console.log(selectedDays)
   return (
     <table className={`table ${style.monthTable} caption-top table-bordered`}>
-      <caption><h3>{first || month===12 || month===1 ? `${year}年`:''}{month}月</h3></caption>
+      <caption>
+        <h3>
+          {firstMonthOfList || month === 12 || month === 1 ? `${year}年` : ''}
+          {month}月
+        </h3>
+      </caption>
       <TableHead sundayFirst={sundayFirst} />
       <tbody>
         {[...Array(weeks)].map((_, weekIndex) => (
@@ -65,8 +69,7 @@ const Month: FunctionComponent<MonthInterface> = ({
               )
               return (
                 <Cell
-                  day={day.getDate()}
-                  month={day.getMonth()+1}
+                  date={day}
                   displayMonth={isFirstDayOfMonth(day) || isLastDayOfMonth(day)}
                   className={`${
                     day.getDay() === 0 || day.getDay() === 6
@@ -75,6 +78,7 @@ const Month: FunctionComponent<MonthInterface> = ({
                   } ${day.getMonth() + 1 !== month ? style.notThisMonth : ''}`}
                   selected={daysContains(selectedDays, day)}
                   key={dayIndex}
+                  onChoose={(date) => { console.log(date)}}
                 />
               )
             })}
