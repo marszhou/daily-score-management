@@ -72,9 +72,13 @@ export function sortDate(a: Date, b: Date) {
 function getWorkDays(begin: Date, count: number): Array<Date>
 function getWorkDays(begin: Date, end: Date): Array<Date>
 function getWorkDays(begin: Date, second: number | Date): Array<Date> {
-  let d = begin
   if (second instanceof Date) {
-    const end = second
+    let end = second
+    if (begin.getTime()>end.getTime()) {
+      [begin, end] = [end, begin]
+    }
+    let d = begin
+
     const days = [begin, end]
     while (true) {
       d = getWorkDay(new Date(d.getTime() + DAY_IN_MS))
@@ -86,6 +90,8 @@ function getWorkDays(begin: Date, second: number | Date): Array<Date> {
     }
     return days
   } else {
+    let d = begin
+
     const count = second
     const days = [...Array(count)].map(() => {
       d = getWorkDay(new Date(d.getTime() + DAY_IN_MS))
