@@ -53,11 +53,54 @@ export function isLastDayOfMonth(day: Date) {
   )
 }
 
+export function equalDate(d1: Date, d2: Date) {
+  return (
+    d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate()
+  )
+}
+
 export function daysContains(days: Array<Date>, day: Date) {
-  return days.findIndex(
-    (d) =>
-      d.getFullYear() === day.getFullYear() &&
-      d.getMonth() === day.getMonth() &&
-      d.getDate() === day.getDate()
-  ) > -1
+  return days.findIndex((d) => equalDate(d, day)) > -1
+}
+
+export function sortDate(a: Date, b: Date) {
+  return a.getTime() - b.getTime()
+}
+
+function getWorkDays(begin: Date, count: number): Array<Date>
+function getWorkDays(begin: Date, end: Date): Array<Date>
+function getWorkDays(begin: Date, second: number | Date): Array<Date> {
+  let d = begin
+  if (second instanceof Date) {
+    const end = second
+    const days = [begin, end]
+    while (true) {
+      d = getWorkDay(new Date(d.getTime() + DAY_IN_MS))
+      if (d.getTime() < end.getTime()) {
+        days.push(d)
+      } else {
+        break
+      }
+    }
+    return days
+  } else {
+    const count = second
+    const days = [...Array(count)].map(() => {
+      d = getWorkDay(new Date(d.getTime() + DAY_IN_MS))
+      return d
+    })
+    return days
+  }
+}
+export { getWorkDays }
+
+export function getMinDay(days: Array<Date>) {
+  if (days.length === 0) return undefined
+  return days.reduce((r, d) => (d.getTime() < r.getTime() ? d : r))
+}
+export function getMaxDay(days: Array<Date>) {
+  if (days.length === 0) return undefined
+  return days.reduce((r, d) => (d.getTime() > r.getTime() ? d : r))
 }

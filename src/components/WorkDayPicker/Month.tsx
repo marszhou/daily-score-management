@@ -8,7 +8,7 @@ import {
   WEEK_DAYS,
   WEEK_DAYS_SUNDAY_FIRST,
 } from '../../utils/date'
-import Cell from './Cell'
+import Cell, { SetDateProps } from './Cell'
 import style from './Month.module.scss'
 import { WorkDayPickerDays } from './WorkDayPicker'
 
@@ -42,12 +42,15 @@ const TableHead = function ({ sundayFirst }: { sundayFirst: boolean }) {
   )
 }
 
-const Month: FunctionComponent<MonthInterface> = ({
+const Month: FunctionComponent<MonthInterface & SetDateProps> = ({
   year,
   month,
   sundayFirst = false,
   selectedDays = [],
   firstMonthOfList,
+  onChoose,
+  onSetBegin,
+  onSetEnd
 }) => {
   let [start, , days] = getCalendarMonthRange(year, month, sundayFirst)
   const weeks = days / 7
@@ -78,7 +81,7 @@ const Month: FunctionComponent<MonthInterface> = ({
                   } ${day.getMonth() + 1 !== month ? style.notThisMonth : ''}`}
                   selected={daysContains(selectedDays, day)}
                   key={dayIndex}
-                  onChoose={(date) => { console.log(date)}}
+                  {...{onChoose, onSetBegin, onSetEnd}}
                 />
               )
             })}

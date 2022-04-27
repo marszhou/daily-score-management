@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from 'react'
-import { getWorkDay } from '../../utils/date'
+import { daysContains, equalDate, getWorkDay, getWorkDays } from '../../utils/date'
 import Picker from './Picker'
 import Reset from './Reset'
 import Setup, { SetupNextValue } from './Setup'
@@ -14,6 +14,7 @@ const WorkDayPicker: FunctionComponent<WorkDayPickerProps> = ({
 }) => {
   const [days, setDays] = useState<WorkDayPickerDays>([])
   const [title, setTitle] = useState('')
+  const [isSetup, setIsSetup] = useState(false)
 
   useEffect(() => {
     if (defaultValues) {
@@ -22,23 +23,35 @@ const WorkDayPicker: FunctionComponent<WorkDayPickerProps> = ({
   }, [])
   const handleNext = (value: SetupNextValue) => {
     const { title, year, month, date, count } = value
-    let d = new Date(year, month - 1, date-1)
-    const days = [...Array(count)].map(() => {
-      d = getWorkDay(new Date(d.getTime() + 86400_000))
-      return d
-    })
+    let begin = new Date(year, month - 1, date-1)
+    const days = getWorkDays(begin, count)
     setDays(days)
     setTitle(title)
+    setIsSetup(true)
     return
   }
   const handleReset = () => {
     setDays([])
+    setTitle('')
+    setIsSetup(false)
   }
-  if (days.length > 0) {
+  const handleChooseDate = (date: Date) => {
+    let next:Array<Date>
+    if (daysContains(days, date)) {
+      next = days.filter(d => !equalDate(d, date))
+    } else {
+      next = [...days, date]
+    }
+    setDays(next)
+  }
+  const handleSetBegin = (date: Date) => {
+
+  }
+  if (isSetup) {
     return (
       <>
         {!defaultValues && <Reset onReset={handleReset} />}
-        <Picker days={days} />
+        <Picker days={days} onChoose={handleChooseDate}/>
       </>
     )
   } else {
