@@ -12,7 +12,7 @@ import Setup, { SetupNextValue } from './Setup'
 
 export type WorkDayPickerDays = Array<Date>
 interface WorkDayPickerProps {
-  defaultValues: WorkDayPickerDays | undefined
+  defaultValues?: WorkDayPickerDays
 }
 
 const WorkDayPicker: FunctionComponent<WorkDayPickerProps> = ({

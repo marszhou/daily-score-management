@@ -19,5 +19,3 @@ root.render(
   </React.StrictMode>
 )
 
-navigator.clipboard.readText().then(
-  clipText => console.log(clipText));

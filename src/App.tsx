@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router'
+import StudentListDemo from './views/StudentListDemo'
 import WorkDayPickerDemo from './views/WorkDayPickerDemo'
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
       <Routes>
         <Route path="/" element={<h1>Hello</h1>} />
         <Route path="/work-day-picker-demo" element={<WorkDayPickerDemo />} />
+        <Route path="/student-list-demo" element={<StudentListDemo />} />
       </Routes>
     </div>
   )
