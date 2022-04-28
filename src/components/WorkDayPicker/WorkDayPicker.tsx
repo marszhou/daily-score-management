@@ -4,7 +4,6 @@ import {
   equalDate,
   getMaxDay,
   getMinDay,
-  getWorkDay,
   getWorkDays,
 } from '../../utils/date'
 import Picker from './Picker'
@@ -27,6 +26,7 @@ const WorkDayPicker: FunctionComponent<WorkDayPickerProps> = ({
     if (defaultValues) {
       setDays(defaultValues)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const handleNext = (value: SetupNextValue) => {
     const { title, year, month, date, count } = value
@@ -81,7 +81,7 @@ const WorkDayPicker: FunctionComponent<WorkDayPickerProps> = ({
   if (isSetup) {
     return (
       <>
-        {!defaultValues && <Reset onReset={handleReset} />}
+        {!defaultValues && <Reset onReset={handleReset}  count={days.length}/>}
         <Picker
           days={days}
           onChoose={handleChooseDate}
