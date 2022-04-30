@@ -5,7 +5,7 @@ import { ArrowReturnLeft, PencilFill } from 'react-bootstrap-icons'
 import StudentInput from '../components/StudentList/StudentInput'
 import ClipboardImportButton from '../components/StudentList/ClipboardImportButton'
 import ListTable from '../components/StudentList/ListTable'
-import SaveButton from '../components/StudentList/SaveButton'
+import SaveButton from '../components/SaveButton'
 // import {Buffer} from 'buffer'
 
 interface StudentListDemoProps {}

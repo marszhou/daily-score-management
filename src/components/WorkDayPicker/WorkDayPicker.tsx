@@ -6,17 +6,19 @@ import {
   getMinDay,
   getWorkDays,
 } from '../../utils/date'
+import SaveButton from '../SaveButton'
 import Picker from './Picker'
 import Reset from './Reset'
 import Setup, { SetupNextValue } from './Setup'
 
 export type WorkDayPickerDays = Array<Date>
 interface WorkDayPickerProps {
-  defaultValues?: WorkDayPickerDays
+  defaultValues?: WorkDayPickerDays,
+  onSave?(title: string, days: Array<Date>): void
 }
 
 const WorkDayPicker: FunctionComponent<WorkDayPickerProps> = ({
-  defaultValues,
+  defaultValues, onSave
 }) => {
   const [days, setDays] = useState<WorkDayPickerDays>([])
   const [title, setTitle] = useState('')
@@ -88,6 +90,7 @@ const WorkDayPicker: FunctionComponent<WorkDayPickerProps> = ({
           onSetBegin={handleSetBegin}
           onSetEnd={handleSetEnd}
         />
+        <SaveButton onSave={() => onSave?.(title, days)}/>
       </>
     )
   } else {
