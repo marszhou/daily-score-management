@@ -1,10 +1,14 @@
 import { FunctionComponent, useRef, useState } from 'react'
 
 interface StudentInputProps {
+  isExist(name: string): boolean
   onSubmit?(name: string): boolean
 }
 
-const StudentInput: FunctionComponent<StudentInputProps> = ({ onSubmit }) => {
+const StudentInput: FunctionComponent<StudentInputProps> = ({
+  onSubmit,
+  isExist,
+}) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [isValidated, setIsValidated] = useState(false)
 
@@ -15,14 +19,17 @@ const StudentInput: FunctionComponent<StudentInputProps> = ({ onSubmit }) => {
       onSubmit={(e) => {
         e.preventDefault()
         const form = e.target as HTMLFormElement
-        const name = inputRef.current?.value?.trim() || ''
-        if (name === '') {
-          inputRef.current?.setCustomValidity('填写有效名字')
-        } else {
-          if (!onSubmit?.(name)) {
-            inputRef.current?.setCustomValidity('该名称已经存在')
+        if (inputRef.current) {
+          const name = inputRef.current.value.trim()
+          if (name === '') {
+            inputRef.current.setCustomValidity('填写有效名字')
           } else {
-            inputRef.current?.setCustomValidity('')
+            if (!onSubmit?.(name)) {
+              inputRef.current.setCustomValidity('该名称已经存在')
+            } else {
+              inputRef.current.setCustomValidity('')
+              inputRef.current.value = ''
+            }
           }
         }
         form.reportValidity()
@@ -41,7 +48,13 @@ const StudentInput: FunctionComponent<StudentInputProps> = ({ onSubmit }) => {
           ref={inputRef}
           name="name"
           onChange={() => {
-            // inputRef.current?.checkValidity()
+            const name = inputRef.current?.value.trim() || ''
+            if (isExist(name)) {
+              inputRef.current?.setCustomValidity('该名称已存在')
+            } else {
+              inputRef.current?.setCustomValidity('')
+            }
+            inputRef.current?.reportValidity()
           }}
         />
         <button

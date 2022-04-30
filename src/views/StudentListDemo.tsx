@@ -21,7 +21,7 @@ const StudentListDemo: FunctionComponent<StudentListDemoProps> = () => {
       </div>
       <h2>输入新的学生</h2>
       <div className="border rounded p-4">
-        <StudentInput onSubmit={() => false}/>
+        <StudentInput isExist={(name) => name === '123'} onSubmit={() => false}/>
 
         <HR text="或" />
 
