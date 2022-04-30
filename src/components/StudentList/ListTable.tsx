@@ -27,6 +27,7 @@ const ListTable: FunctionComponent<ListTableProps> = () => {
           <td className={style.avatar}>
             <img
               src={`data:image/svg+xml;utf8,${encodeURIComponent(svgString)}`}
+              alt=''
             />
           </td>
           <td style={{ verticalAlign: 'middle' }}>
@@ -52,6 +53,7 @@ const ListTable: FunctionComponent<ListTableProps> = () => {
           <td>
             <img
               src={`data:image/svg+xml;utf8,${encodeURIComponent(svgString)}`}
+              alt=''
             />
           </td>
           <td>
@@ -75,6 +77,7 @@ const ListTable: FunctionComponent<ListTableProps> = () => {
           <td>
             <img
               src={`data:image/svg+xml;utf8,${encodeURIComponent(svgString)}`}
+              alt=''
             />
           </td>
           <td>

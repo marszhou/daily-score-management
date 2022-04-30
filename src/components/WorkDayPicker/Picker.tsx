@@ -40,6 +40,7 @@ const Picker: FunctionComponent<PickerProps & SetDateProps> = ({
       return a
     }, [])
     setMonths(months)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <>
