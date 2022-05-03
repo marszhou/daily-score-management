@@ -66,7 +66,7 @@ const StudentRow: FunctionComponent<StudentRowProps> = ({
                   } else {
                     // 报错
                     inputRef.current.setCustomValidity('姓名不能为空，并且不能重复。')
-                    inputRef.current.reportValidity(true)
+                    inputRef.current.reportValidity()
                   }
                 }
               }}
