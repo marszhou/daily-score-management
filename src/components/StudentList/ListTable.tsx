@@ -1,12 +1,20 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { toSvg } from 'jdenticon'
 import { ArrowReturnLeft, PencilFill } from 'react-bootstrap-icons'
 import style from './ListTable.module.scss'
+import { Student } from '../../types/student'
 
-interface ListTableProps {}
+interface ListTableProps {
+  students: Array<Student>
+}
 
-const ListTable: FunctionComponent<ListTableProps> = () => {
+const ListTable: FunctionComponent<ListTableProps> = ({students}) => {
   const svgString = toSvg('hahah', 32)
+  const [selected, setSelected] = useState<Array<string>>([])
+  useEffect(() => {
+    setSelected(students.map(s => s.id))
+  },[])
+  console.log(selected)
 
   return (
     <table className={`table table-hover caption-top ${style.ListTable}`}>
