@@ -4,7 +4,7 @@ import StudentInput from '../components/StudentList/StudentInput'
 import ClipboardImportButton from '../components/StudentList/ClipboardImportButton'
 import ListTable from '../components/StudentList/ListTable'
 import SaveButton from '../components/SaveButton'
-import {v4} from 'node-uuid'
+import { v4 } from 'node-uuid'
 import { toSvg } from 'jdenticon'
 
 interface StudentListDemoProps {}
@@ -24,14 +24,13 @@ const STUDENTS = [
   '马若涵',
   '郭浩然',
   '郑庆贺',
-].map(name=>({id: v4(), name, avatar: (toSvg(name, 32))}))
+].map((name) => ({ id: v4(), name, avatar: toSvg(name, 32) }))
 
 const StudentListDemo: FunctionComponent<StudentListDemoProps> = () => {
   const [students, setStudents] = useState(STUDENTS)
 
   return (
     <>
-      <img src={'data:image/svg+xml;utf-8,' + encodeURIComponent(students[0].avatar)} />
       <h2>输入新的学生</h2>
       <div className="border rounded p-4">
         <StudentInput
@@ -41,7 +40,16 @@ const StudentListDemo: FunctionComponent<StudentListDemoProps> = () => {
 
         <HR text="或" />
 
-        <ClipboardImportButton />
+        <ClipboardImportButton
+          getAvalibleNames={(text) => {
+            const names = students.map(s => s.name)
+            return text
+              .split('\n')
+              .map((s) => s.trim())
+              .filter((s) => s.length > 0)
+              .filter((s) => !names.includes(s))
+          }}
+        />
 
         <ListTable students={students} />
 
