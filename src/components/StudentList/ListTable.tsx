@@ -42,13 +42,23 @@ const ListTable: FunctionComponent<ListTableProps> = ({ students }) => {
       </caption>
 
       <tbody>
-        {students.map((student) => (
+        {students.map((student, index) => (
           <StudentRow
             key={student.id}
             checked={selected.includes(student.id)}
             student={student}
-            onChange={() => {
-              return false
+            onChange={(newName) => {
+              if (newName.trim().length === 0) {
+                return false
+              }
+              const find = students.findIndex((s) => s.name === newName)
+              if (find === -1 || find === index) {
+                student.name = newName
+                student.avatar = toSvg(newName, 32)
+                return true
+              } else {
+                return false
+              }
             }}
             onSelect={(id) => {
               if (selected.includes(id)) {
