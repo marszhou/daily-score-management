@@ -34,21 +34,32 @@ const StudentListDemo: FunctionComponent<StudentListDemoProps> = () => {
       <h2>输入新的学生</h2>
       <div className="border rounded p-4">
         <StudentInput
-          isExist={(name) => name === '123'}
-          onSubmit={() => false}
+          isExist={(name) => students.some((s) => s.name === name)}
+          onSubmit={(name) => {
+            if (students.some((s) => s.name !== name)) {
+              const student = { id: v4(), name, avatar: toSvg(name, 32) }
+              setStudents([...students, student])
+              return true
+            }
+            return false
+          }}
         />
 
         <HR text="或" />
 
         <ClipboardImportButton
-          getAvalibleNames={(text) => {
-            const names = students.map(s => s.name)
-            return text
-              .split('\n')
-              .map((s) => s.trim())
-              .filter((s) => s.length > 0)
-              .filter((s) => !names.includes(s))
+          onImport={(names) => {
+            setStudents(
+              names.reduce(
+                (students, name) => {
+                  students.push({ name, id: v4(), avatar: toSvg(name, 32) })
+                  return students
+                },
+                [...students]
+              )
+            )
           }}
+          currentNames={students.map(s => s.name)}
         />
 
         <ListTable students={students} />

@@ -23,17 +23,19 @@ const StudentInput: FunctionComponent<StudentInputProps> = ({
           const name = inputRef.current.value.trim()
           if (name === '') {
             inputRef.current.setCustomValidity('填写有效名字')
+            setIsValidated(true)
           } else {
             if (!onSubmit?.(name)) {
               inputRef.current.setCustomValidity('该名称已经存在')
+              setIsValidated(true)
             } else {
               inputRef.current.setCustomValidity('')
               inputRef.current.value = ''
+              setIsValidated(false)
             }
           }
+          form.reportValidity()
         }
-        form.reportValidity()
-        setIsValidated(true)
       }}
     >
       <div className="input-group mb-3">
@@ -44,9 +46,9 @@ const StudentInput: FunctionComponent<StudentInputProps> = ({
           placeholder=""
           aria-label="学生名字"
           aria-describedby="button-addon2"
-          required
           ref={inputRef}
           name="name"
+          autoComplete='off'
           onChange={() => {
             const name = inputRef.current?.value.trim() || ''
             if (isExist(name)) {
