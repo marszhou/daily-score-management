@@ -9,7 +9,7 @@ const SaveButton: FunctionComponent<SaveButtonProps> = ({onSave}) => {
     <div className="d-grid gap-2 mt-4">
       <button
         className="btn btn-primary btn-sm"
-        type="button"
+        type="submit"
         onClick={onSave}
       >
         保存
