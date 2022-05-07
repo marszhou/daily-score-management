@@ -2,7 +2,7 @@ import WorkDayPicker from "../components/WorkDayPicker/WorkDayPicker";
 
 const WorkDayPickerDemo = () => {
 
-  return ( <><WorkDayPicker />
+  return ( <><WorkDayPicker onSave={(title, days) => {console.log(title, days)}}/>
   </> );
 }
 
