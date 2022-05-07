@@ -10,17 +10,19 @@ interface ListTableProps {
 }
 
 const ListTable: FunctionComponent<ListTableProps> = ({ students }) => {
-  const svgString = toSvg('hahah', 32)
   const [selected, setSelected] = useState<Array<string>>([])
   const [checkAll, setCheckAll] = useState(true)
   useEffect(() => {
     setSelected(students.map((s) => s.id))
   }, [])
+  useEffect(() => {
+    setCheckAll(selected.length === students.length)
+  }, [selected, students])
 
   return (
     <table className={`table table-hover caption-top ${style.ListTable}`}>
       <caption>
-        已有{' '}
+        学生 {selected.length}/{students.length} {' '}
         <label>
           <input
             type="checkbox"
