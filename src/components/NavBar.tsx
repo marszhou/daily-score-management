@@ -33,7 +33,7 @@ const NavBar: FunctionComponent<NavBarProps> = (props) => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/" className="nav-link">
+              <NavLink to="/homework" className="nav-link">
                 作业
               </NavLink>
             </li>
