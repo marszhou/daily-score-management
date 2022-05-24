@@ -58,7 +58,7 @@ const NavBar: FunctionComponent<NavBarProps> = (props) => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/" className="nav-link">
+              <NavLink to="/settings" className="nav-link">
                 设置
               </NavLink>
             </li>
