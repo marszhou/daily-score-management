@@ -55,25 +55,28 @@ const Setup: React.FunctionComponent<SetupProps> = ({ onNext }) => {
     setIsValidated(true)
   }
   return (
-    <div className="border rounded p-4">
+    <div className="">
       <form
         className={`needs-validation ${isValidated ? 'was-validated' : ''}`}
         noValidate
         onSubmit={handleSubmit}
       >
         <div className="row">
-          <div className="col">
+          <div className="mb-3">
+          <label className="form-label">标题</label>
             <input
               type="text"
               name="title"
-              className="form-control form-control-sm"
+              className="form-control "
               placeholder="标题"
               aria-label="标题"
               required
             />
             <div className="invalid-feedback">请填写标题</div>
           </div>
-          <div className="col">
+          <div className="mb-3">
+          <label className="form-label">年</label>
+
             <select
               className="form-select form-select-sm"
               name="year"
@@ -94,7 +97,9 @@ const Setup: React.FunctionComponent<SetupProps> = ({ onNext }) => {
             </select>
             <div className="invalid-feedback">请选择年</div>
           </div>
-          <div className="col">
+          <div className="mb-3">
+          <label className="form-label">月</label>
+
             <select
               className="form-select form-select-sm"
               name="month"
@@ -115,7 +120,9 @@ const Setup: React.FunctionComponent<SetupProps> = ({ onNext }) => {
             </select>
             <div className="invalid-feedback">请选择月</div>
           </div>
-          <div className="col">
+          <div className="mb-3">
+          <label className="form-label">日</label>
+
             <select
               className="form-select form-select-sm"
               name="date"
@@ -137,11 +144,13 @@ const Setup: React.FunctionComponent<SetupProps> = ({ onNext }) => {
             <div className="invalid-feedback">请选择日</div>
           </div>
 
-          <div className="col">
+          <div className="mb-3">
+          <label className="form-label">课程天数</label>
+
             <input
               type="number"
               name="count"
-              className="form-control form-control-sm"
+              className="form-control "
               placeholder="课程天数"
               aria-label="课程天数"
               defaultValue={20}
@@ -151,7 +160,7 @@ const Setup: React.FunctionComponent<SetupProps> = ({ onNext }) => {
             <div className="invalid-feedback">请填写有效课程天数</div>
           </div>
 
-          <div className="col">
+          <div className="mb-3">
             <div className="d-grid gap-2">
               <button type="submit" className="btn btn-primary btn-sm">
                 下一步

@@ -1,14 +1,15 @@
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 
-td:hover {
-  .actions {
-    visibility: visible;
-  }
-}
 td{
+  cursor: pointer!important;
   .actions {
     visibility: hidden;
     text-align: right;
+  }
+  &:hover {
+    .actions {
+      visibility: visible;
+    }
   }
 }
 

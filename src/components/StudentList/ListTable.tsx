@@ -1,6 +1,5 @@
 import { FunctionComponent, useEffect, useState } from 'react'
 import { toSvg } from 'jdenticon'
-import { ArrowReturnLeft, PencilFill } from 'react-bootstrap-icons'
 import style from './ListTable.module.scss'
 import { Student } from '../../types/student'
 import StudentRow from './StudentRow'
@@ -14,7 +13,7 @@ const ListTable: FunctionComponent<ListTableProps> = ({ students }) => {
   const [checkAll, setCheckAll] = useState(true)
   useEffect(() => {
     setSelected(students.map((s) => s.id))
-  }, [])
+  }, [students])
   useEffect(() => {
     setCheckAll(selected.length === students.length)
   }, [selected, students])

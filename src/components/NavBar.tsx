@@ -1,5 +1,5 @@
 import React, { DetailedHTMLProps, FunctionComponent } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 interface NavBarProps
   extends DetailedHTMLProps<

@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef } from 'react'
+import { FunctionComponent } from 'react'
 import { form2json } from '../../utils/form'
 import SaveButton from '../SaveButton'
 
@@ -20,7 +20,7 @@ const RatioSettings: FunctionComponent<RatioSettingsProps> = ({
 }) => {
   return (
     <form
-      className="needs-validation border rounded p-4 was-validated"
+      className="needs-validation  was-validated"
       action=""
       onSubmit={(e) => {
         e.preventDefault()
