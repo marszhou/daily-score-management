@@ -7,6 +7,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import 'rsuite/dist/rsuite.min.css'
 // import 'bootstrap/scss/bootstrap.scss'
 import './custom.scss'
+import { db } from './app/db'
+import { v4 } from 'uuid'
 
 const root = createRoot(document.getElementById('root') as Element)
 root.render(
@@ -19,3 +21,10 @@ root.render(
   </React.StrictMode>
 )
 
+db.students.add({
+  id: v4(),
+  name: 'haha2',
+  avatar: ''
+}).catch(e => {
+  console.log(e)
+})
