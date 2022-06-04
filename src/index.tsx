@@ -12,19 +12,19 @@ import { v4 } from 'uuid'
 
 const root = createRoot(document.getElementById('root') as Element)
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
 )
 
-db.students.add({
-  id: v4(),
-  name: 'haha2',
-  avatar: ''
-}).catch(e => {
-  console.log(e)
-})
+db.students
+  .add({
+    id: v4(),
+    name: Math.random().toString(36).substring(-8),
+    avatar: '',
+  })
+  .catch((e) => {
+    console.log(e)
+  })

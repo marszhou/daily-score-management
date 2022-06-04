@@ -1,11 +1,19 @@
+import { useEffect } from 'react'
 import { Route, Routes } from 'react-router'
+import { useAppDispatch } from './app/hooks'
 import NavBar from './components/NavBar'
+import { initLoadStudents } from './features/students/studentsSlices'
 import Index from './views/Index'
 import RatioSettingsDemo from './views/RatioSettingsDemo'
 import StudentListDemo from './views/StudentListDemo'
 import WorkDayPickerDemo from './views/WorkDayPickerDemo'
 
 function App() {
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(initLoadStudents())
+  }, [dispatch])
+
   return (
     <div className="container-lg">
       <NavBar />

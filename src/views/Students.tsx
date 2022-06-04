@@ -6,6 +6,8 @@ import ListTable from '../components/StudentList/ListTable'
 import SaveButton from '../components/SaveButton'
 import { v4 } from 'uuid'
 import { toSvg } from 'jdenticon'
+import { initLoadStudents, saveStudents } from '../features/students/studentsSlices'
+import { useAppDispatch } from '../app/hooks'
 
 interface StudentsProps {}
 
@@ -27,6 +29,7 @@ const STUDENTS = [
 ].map((name) => ({ id: v4(), name, avatar: toSvg(name, 32) }))
 
 const Students: FunctionComponent<StudentsProps> = () => {
+  const dispatch = useAppDispatch()
   const [students, setStudents] = useState(STUDENTS)
 
   return (
@@ -66,7 +69,12 @@ const Students: FunctionComponent<StudentsProps> = () => {
 
         <ListTable students={students} />
 
-        <SaveButton />
+        <SaveButton onSave={() => {
+          dispatch(saveStudents([
+            {id: '111', name: '马若涵', avatar: 'yyy'}
+          ]))
+
+        }}/>
       </div>
     </>
   )
