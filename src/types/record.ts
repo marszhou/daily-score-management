@@ -5,9 +5,9 @@ export enum RecordTypes {
   exam = 'exam',
 }
 
-export interface Records {
+export interface Record {
   id: number
   type: RecordTypes
   studentId: string
-  value: boolean | number
+  value: boolean | number,
 }

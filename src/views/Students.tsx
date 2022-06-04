@@ -6,7 +6,7 @@ import ListTable from '../components/StudentList/ListTable'
 import SaveButton from '../components/SaveButton'
 import { v4 } from 'uuid'
 import { toSvg } from 'jdenticon'
-import { initLoadStudents, saveStudents } from '../features/students/studentsSlices'
+import { saveStudents } from '../features/students/studentsSlices'
 import { useAppDispatch } from '../app/hooks'
 
 interface StudentsProps {}

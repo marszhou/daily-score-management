@@ -1,12 +1,12 @@
 import Dexie, { Table } from "dexie";
-import { Records } from "../types/records";
-import { Settings } from "../types/settings";
+import { Record } from "../types/record";
+import { Setting } from "../types/setting";
 import { Student } from "../types/student";
 
 export class DB extends Dexie {
   students!: Table<Student>
-  settings!: Table<Settings>
-  records!: Table<Records>
+  settings!: Table<Setting>
+  records!: Table<Record>
 
   constructor() {
     super('dsm-db')
